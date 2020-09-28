@@ -4,6 +4,9 @@ LABEL description="Amazon CLI docker image with non-root user"
 RUN set -o errexit -o nounset \
   && echo "Installing shadow-utils" \
   && yum -y install shadow-utils \
+  && yum -y clean all
+
+RUN set -o errexit -o nounset \
   && echo "Adding aws user and group" \
   && groupadd --system --gid 1000 aws \
   && useradd --system --gid aws --uid 1000 --shell /bin/bash --create-home aws \
